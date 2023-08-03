@@ -1,18 +1,38 @@
 const form = document.getElementById("form");
 const library = document.getElementById("library");
+const addBookButton = document.getElementById("add-book");
+
 
 //button to show up form
 const newBookButton = document.getElementById("newBook").addEventListener("click", function(){
   openFormOverlay();
 })
 
+
+
+
+
 // Object constructor
-function Book(title, author, numPages, readed) {
+class Book {
+  constructor(title, author, numPages, readed){
   this.title = title;
   this.author = author;
   this.numPages = numPages;
   this.readed = readed;
+  }
+
+  set title(value){
+    if(value.length < 4){
+      alert("Too short title");
+    }else{
+      this._title = value;
+    }
+  }
 }
+
+
+
+
 
 // Display form
 function openFormOverlay() {
@@ -41,6 +61,7 @@ form.addEventListener("submit", function (event) {
 
 
   //push every new object into the array that will be displayed
+  if(book._title){
   listBooks.push(book);
 
   //call the function that displays the array
@@ -49,6 +70,7 @@ form.addEventListener("submit", function (event) {
   //on submit or cancel, close the form
   let formOverlay = document.getElementById("form-overlay");
   formOverlay.style.display = "none";
+  }
 });
 
 
